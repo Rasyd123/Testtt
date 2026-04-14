@@ -1,312 +1,239 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portofolio Profesional syid — Creative Developer & UI Specialist</title>
+    <title>PayVault – Personal Payment Repository</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        dark: '#050505',
-                        card: '#121212',
-                        border: '#2D2D2D',
-                        accent: {
-                            indigo: '#6366F1',
-                            purple: '#A855F7'
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        heading: ['Plus Jakarta Sans', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
     <style>
-        body { background-color: #050505; color: #F8FAFC; }
-        .glass-nav { backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid rgba(45, 45, 45, 0.5); }
-        .gradient-text { background: linear-gradient(135deg, #6366F1 0%, #A855F7 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .btn-primary { background: linear-gradient(135deg, #6366F1 0%, #A855F7 100%); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-        .btn-primary:hover { box-shadow: 0 0 20px rgba(99, 102, 241, 0.5); transform: scale(1.05); }
-        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
-        .reveal.active { opacity: 1; transform: translateY(0); }
-        .project-card { transition: all 0.4s ease; border: 1px solid #2D2D2D; }
-        .project-card:hover { transform: translateY(-10px); border-color: #6366F1; }
-        @keyframes border-rotate { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-        .animated-border { background: linear-gradient(270deg, #6366F1, #A855F7, #6366F1); background-size: 200% 200%; animation: border-rotate 4s ease infinite; padding: 4px; border-radius: 9999px; }
-        .typewriter::after { content: '|'; animation: blink 0.7s infinite; }
-        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
-        .shake { animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both; }
-        @keyframes shake { 10%, 90% { transform: translate3d(-1px, 0, 0); } 20%, 80% { transform: translate3d(2px, 0, 0); } 30%, 50%, 70% { transform: translate3d(-4px, 0, 0); } 40%, 60% { transform: translate3d(4px, 0, 0); } }
+        :root {
+            --bg-deep: #0F172A;
+            --card-slate: rgba(30, 41, 59, 0.6);
+            --accent-sky: #38BDF8;
+            --accent-emerald: #22C55E;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-deep);
+            color: #F8FAFC;
+            overflow-x: hidden;
+        }
+        h1, h2, h3 { font-family: 'Montserrat', sans-serif; }
+        .glass-card {
+            background: var(--card-slate);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-card:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.2);
+            border-color: var(--accent-sky);
+        }
+        .modal-enter {
+            animation: pop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+        @keyframes pop {
+            from { opacity: 0; transform: scale(0.5); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease-out forwards;
+            opacity: 0;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .toast-active { transform: translate(-50%, -24px); opacity: 1; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-deep); }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--accent-sky); }
     </style>
 </head>
-<body class="antialiased">
+<body class="min-h-screen">
 
-    <nav class="fixed top-0 w-full z-50 glass-nav py-4">
-        <div class="max-w-[1200px] mx-auto px-6 flex justify-between items-center">
-            <a href="#" class="text-2xl font-heading font-extrabold tracking-tighter italic">syid<span class="text-accent-indigo">.</span></a>
-            <div class="hidden md:flex space-x-8 font-medium">
-                <a href="#home" class="nav-link text-slate-400 hover:text-white transition-colors" data-section="home">Home</a>
-                <a href="#projects" class="nav-link text-slate-400 hover:text-white transition-colors" data-section="projects">Projects</a>
-                <a href="#services" class="nav-link text-slate-400 hover:text-white transition-colors" data-section="services">Services</a>
-                <a href="#contact" class="nav-link text-slate-400 hover:text-white transition-colors" data-section="contact">Contact</a>
+    <nav class="sticky top-0 z-40 w-full glass-card border-none rounded-none border-b border-white/10 px-6 py-4">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <div class="p-2 bg-sky-500 rounded-lg">
+                    <i data-lucide="shield-check" class="text-white w-6 h-6"></i>
+                </div>
+                <span class="text-xl font-extrabold tracking-tight bg-gradient-to-r from-white to-sky-400 bg-clip-text text-transparent uppercase">PayVault</span>
             </div>
-            <a href="#contact" class="btn-primary px-6 py-2 rounded-full text-sm font-semibold">Hire Me</a>
+            <div class="flex items-center gap-4">
+                <div class="hidden md:flex items-center gap-2 bg-slate-900/50 px-3 py-1.5 rounded-full border border-white/5">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                    <span class="text-xs font-medium text-slate-400">System Secure</span>
+                </div>
+                <button class="p-2 hover:bg-white/10 rounded-full transition-colors"><i data-lucide="user" class="w-5 h-5 text-slate-300"></i></button>
+            </div>
         </div>
     </nav>
 
-    <section id="home" class="pt-32 pb-20 md:pt-48 md:pb-32 px-6">
-        <div class="max-w-[1200px] mx-auto grid md:grid-cols-2 gap-12 items-center">
-            <div class="reveal">
-                <h1 class="text-5xl md:text-7xl font-heading font-extrabold leading-tight mb-6">
-                    Building <span class="gradient-text">Digital</span> Experience.
-                </h1>
-                <p class="text-xl text-slate-400 mb-8 max-w-lg">
-                    I am a <span id="typewriter" class="typewriter text-white font-semibold"></span><br>
-                    Crafting pixel-perfect interfaces with cutting-edge technology.
-                </p>
-                <div class="flex space-x-4">
-                    <a href="#projects" class="btn-primary px-8 py-4 rounded-full font-bold">View Works</a>
-                    <a href="#" class="px-8 py-4 rounded-full border border-border font-bold hover:bg-white hover:text-dark transition-all">Download CV</a>
-                </div>
-            </div>
-            <div class="flex justify-center md:justify-end reveal">
-                <div class="animated-border w-64 h-64 md:w-80 md:h-80">
-                    <div class="w-full h-full rounded-full overflow-hidden bg-dark">
-                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=800" alt="Avatar" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="projects" class="py-24 bg-[#080808]">
-        <div class="max-w-[1200px] mx-auto px-6">
-            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6 reveal">
-                <div>
-                    <h2 class="text-4xl font-heading font-bold mb-4">Selected Projects</h2>
-                    <p class="text-slate-400">Filtering through my latest creative endeavors.</p>
-                </div>
-                <div class="flex flex-wrap gap-3" id="filter-container">
-                    <button class="filter-btn active bg-accent-indigo text-white px-5 py-2 rounded-full text-sm font-medium transition-all" data-filter="all">All</button>
-                    <button class="filter-btn border border-border text-slate-400 px-5 py-2 rounded-full text-sm font-medium hover:border-accent-indigo transition-all" data-filter="Web">Web</button>
-                    <button class="filter-btn border border-border text-slate-400 px-5 py-2 rounded-full text-sm font-medium hover:border-accent-indigo transition-all" data-filter="Mobile">Mobile</button>
-                    <button class="filter-btn border border-border text-slate-400 px-5 py-2 rounded-full text-sm font-medium hover:border-accent-indigo transition-all" data-filter="Design">Design</button>
-                </div>
+    <main class="max-w-7xl mx-auto px-6 py-12">
+        <header class="mb-12 space-y-6">
+            <div class="max-w-2xl">
+                <h1 class="text-4xl md:text-5xl font-extrabold mb-4">Payment Repository</h1>
+                <p class="text-slate-400 text-lg">Manage and share your bank accounts, e-wallets, and QRIS credentials securely in one dashboard.</p>
             </div>
             
-            <div id="project-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 transition-all duration-500">
-                </div>
-        </div>
-    </section>
+            <div class="relative max-w-lg">
+                <i data-lucide="search" class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 w-5 h-5"></i>
+                <input type="text" id="searchInput" placeholder="Search provider or account name..." 
+                       class="w-full bg-slate-800/40 border border-white/10 rounded-2xl py-4 pl-12 pr-4 focus:outline-none focus:ring-2 focus:ring-sky-500/50 transition-all text-white placeholder:text-slate-500">
+            </div>
+        </header>
 
-    <section id="services" class="py-24 px-6">
-        <div class="max-w-[1200px] mx-auto">
-            <h2 class="text-4xl font-heading font-bold mb-16 text-center reveal">My Expertise</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="project-card p-10 bg-card rounded-3xl reveal">
-                    <div class="w-14 h-14 bg-accent-indigo/10 flex items-center justify-center rounded-2xl mb-6 text-accent-indigo text-2xl">
-                        <i class="fa-solid fa-code"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-4">Frontend Dev</h3>
-                    <p class="text-slate-400">Clean, performant code using React, Vue, and modern CSS frameworks.</p>
+        <div id="accountsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            </div>
+
+        <div id="emptyState" class="hidden flex-col items-center justify-center py-20 text-slate-500">
+            <i data-lucide="search-x" class="w-16 h-16 mb-4 opacity-20"></i>
+            <p class="text-xl font-medium">No accounts found</p>
+            <p class="text-sm">Try adjusting your search criteria</p>
+        </div>
+    </main>
+
+    <div id="qrisModal" class="fixed inset-0 z-50 flex items-center justify-center hidden p-6">
+        <div class="absolute inset-0 bg-slate-950/80 backdrop-blur-sm" onclick="closeModal()"></div>
+        <div class="relative bg-white rounded-[32px] p-8 max-w-sm w-full shadow-2xl modal-enter">
+            <button onclick="closeModal()" class="absolute -top-4 -right-4 bg-slate-900 text-white p-2 rounded-full hover:bg-red-500 transition-colors shadow-lg">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+            <div class="text-center">
+                <h3 id="modalTitle" class="text-slate-900 text-xl font-bold mb-1">QRIS Payment</h3>
+                <p id="modalSubtitle" class="text-slate-500 text-sm mb-6">Scan to pay securely</p>
+                <div class="bg-white p-4 rounded-2xl border-2 border-slate-100 aspect-square flex items-center justify-center mb-6">
+                    <img id="qrisImage" src="" alt="QRIS Code" class="w-full h-full object-contain">
                 </div>
-                <div class="project-card p-10 bg-card rounded-3xl reveal">
-                    <div class="w-14 h-14 bg-accent-purple/10 flex items-center justify-center rounded-2xl mb-6 text-accent-purple text-2xl">
-                        <i class="fa-solid fa-wand-magic-sparkles"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-4">UI/UX Design</h3>
-                    <p class="text-slate-400">Creating intuitive user journeys and stunning visual identities.</p>
-                </div>
-                <div class="project-card p-10 bg-card rounded-3xl reveal">
-                    <div class="w-14 h-14 bg-green-500/10 flex items-center justify-center rounded-2xl mb-6 text-green-500 text-2xl">
-                        <i class="fa-solid fa-rocket"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-4">Optimization</h3>
-                    <p class="text-slate-400">Improving web vitals and ensuring lightning-fast load times.</p>
+                <div class="bg-slate-50 rounded-xl p-3 flex items-center justify-center gap-2 border border-slate-100">
+                    <i data-lucide="info" class="w-4 h-4 text-sky-600"></i>
+                    <span class="text-xs text-slate-600 font-medium tracking-wide">Supported by GPN & All E-Wallets</span>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 
-    <section id="contact" class="py-24 px-6 bg-[#080808]">
-        <div class="max-w-[1200px] mx-auto">
-            <div class="bg-card border border-border rounded-[2.5rem] p-8 md:p-16 grid md:grid-cols-2 gap-16 reveal">
-                <div>
-                    <h2 class="text-4xl font-heading font-bold mb-6">Let's build something <span class="gradient-text">extraordinary</span>.</h2>
-                    <p class="text-slate-400 mb-8">Ready to start your next project or just want to say hi? My inbox is always open.</p>
-                    <div class="space-y-4">
-                        <div class="flex items-center space-x-4">
-                            <i class="fa-solid fa-envelope text-accent-indigo"></i>
-                            <span>hello@syid.dev</span>
-                        </div>
-                        <div class="flex items-center space-x-4">
-                            <i class="fa-brands fa-linkedin text-accent-indigo"></i>
-                            <span>linkedin.com/in/syid</span>
-                        </div>
-                    </div>
-                </div>
-                <form id="contact-form" class="space-y-4">
-                    <input type="text" id="name" placeholder="Your Name" required class="w-full bg-dark border border-border rounded-xl px-6 py-4 focus:border-accent-indigo focus:outline-none transition-all">
-                    <input type="email" id="email" placeholder="Email Address" required class="w-full bg-dark border border-border rounded-xl px-6 py-4 focus:border-accent-indigo focus:outline-none transition-all">
-                    <textarea id="message" rows="4" placeholder="Your Project Brief" required class="w-full bg-dark border border-border rounded-xl px-6 py-4 focus:border-accent-indigo focus:outline-none transition-all"></textarea>
-                    <button type="submit" id="submit-btn" class="btn-primary w-full py-4 rounded-xl font-bold text-white transition-all">Send Message</button>
-                </form>
-            </div>
-        </div>
-    </section>
-
-    <footer class="py-12 border-t border-border text-center text-slate-500 text-sm">
-        <p>&copy; 2026 syid. Built with Precision and Passion.</p>
-    </footer>
+    <div id="toast" class="fixed bottom-0 left-1/2 -translate-x-1/2 bg-emerald-500 text-white px-6 py-3 rounded-full shadow-lg font-medium text-sm flex items-center gap-2 opacity-0 transition-all duration-300 pointer-events-none z-50">
+        <i data-lucide="check-circle" class="w-4 h-4"></i>
+        <span>Copied to clipboard!</span>
+    </div>
 
     <script>
-        /** 1. DATA PROJECTS **/
-        const projects = [
-            { id: 1, title: "FinTech Dashboard", category: "Web", img: "https://images.unsplash.com/photo-1551288049-bbbda5366392?auto=format&fit=crop&q=80&w=800" },
-            { id: 2, title: "HealthTrack App", category: "Mobile", img: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80&w=800" },
-            { id: 3, title: "NeoBranding Kit", category: "Design", img: "https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&q=80&w=800" },
-            { id: 4, title: "E-Commerce OS", category: "Web", img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800" },
-            { id: 5, title: "Travel Guide UI", category: "Mobile", img: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&q=80&w=800" },
-            { id: 6, title: "Abstract 3D Art", category: "Design", img: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=800" },
+        const accountsData = [
+            { id: 1, provider: 'Bank BCA', accountName: 'ALEXANDER SMITH', accountNumber: '8820491823', type: 'Bank', color: 'blue' },
+            { id: 2, provider: 'Mandiri', accountName: 'ALEXANDER SMITH', accountNumber: '1240012938481', type: 'Bank', color: 'yellow' },
+            { id: 3, provider: 'GoPay', accountName: 'Alex Smith', accountNumber: '081234567890', type: 'E-Wallet', color: 'emerald' },
+            { id: 4, provider: 'OVO', accountName: 'Alex Smith', accountNumber: '081234567890', type: 'E-Wallet', color: 'purple' },
+            { id: 5, provider: 'Dana', accountName: 'Alex Smith', accountNumber: '081234567890', type: 'E-Wallet', color: 'sky' },
+            { id: 6, provider: 'Global QRIS', accountName: 'VAULT-MERCHANT', accountNumber: '7294021', type: 'QRIS', color: 'rose' }
         ];
 
-        /** 2. DYNAMIC PROJECT GALLERY & FILTERING **/
-        const projectGrid = document.getElementById('project-grid');
-        const filterBtns = document.querySelectorAll('.filter-btn');
+        const accountsGrid = document.getElementById('accountsGrid');
+        const searchInput = document.getElementById('searchInput');
+        const emptyState = document.getElementById('emptyState');
+        const qrisModal = document.getElementById('qrisModal');
+        const toast = document.getElementById('toast');
 
-        function renderProjects(category = 'all') {
-            projectGrid.style.opacity = '0';
-            
-            setTimeout(() => {
-                const filtered = category === 'all' ? projects : projects.filter(p => p.category === category);
-                projectGrid.innerHTML = filtered.map(p => `
-                    <div class="project-card bg-card rounded-3xl overflow-hidden reveal active">
-                        <div class="h-64 overflow-hidden">
-                            <img src="${p.img}" alt="${p.title}" class="w-full h-full object-cover hover:scale-110 transition-transform duration-700">
-                        </div>
-                        <div class="p-6">
-                            <span class="text-xs font-bold text-accent-indigo uppercase tracking-widest">${p.category}</span>
-                            <h3 class="text-xl font-bold mt-2">${p.title}</h3>
-                        </div>
-                    </div>
-                `).join('');
-                projectGrid.style.opacity = '1';
-            }, 300);
-        }
-
-        filterBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                filterBtns.forEach(b => b.classList.remove('active', 'bg-accent-indigo', 'text-white'));
-                filterBtns.forEach(b => b.classList.add('border', 'border-border', 'text-slate-400'));
-                
-                btn.classList.add('active', 'bg-accent-indigo', 'text-white');
-                btn.classList.remove('border', 'border-border', 'text-slate-400');
-                
-                renderProjects(btn.dataset.filter);
-            });
-        });
-
-        /** 3. TYPEWRITER ANIMATION **/
-        const textElement = document.getElementById('typewriter');
-        const phrases = ["Creative Developer", "UI/UX Specialist", "Problem Solver"];
-        let phraseIdx = 0;
-        let charIdx = 0;
-        let isDeleting = false;
-
-        function type() {
-            const currentPhrase = phrases[phraseIdx];
-            if (isDeleting) {
-                textElement.textContent = currentPhrase.substring(0, charIdx - 1);
-                charIdx--;
-            } else {
-                textElement.textContent = currentPhrase.substring(0, charIdx + 1);
-                charIdx++;
-            }
-
-            let typeSpeed = isDeleting ? 50 : 150;
-
-            if (!isDeleting && charIdx === currentPhrase.length) {
-                isDeleting = true;
-                typeSpeed = 2000; // Pause at end
-            } else if (isDeleting && charIdx === 0) {
-                isDeleting = false;
-                phraseIdx = (phraseIdx + 1) % phrases.length;
-                typeSpeed = 500;
-            }
-
-            setTimeout(type, typeSpeed);
-        }
-
-        /** 4. INTERSECTION OBSERVER (REVEAL) **/
-        const observerOptions = { threshold: 0.1 };
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
-            });
-        }, observerOptions);
-
-        /** 5. ACTIVE NAV & SMOOTH SCROLL **/
-        const sections = document.querySelectorAll('section');
-        const navLinks = document.querySelectorAll('.nav-link');
-
-        window.addEventListener('scroll', () => {
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                if (pageYOffset >= sectionTop - 150) {
-                    current = section.getAttribute('id');
-                }
-            });
-
-            navLinks.forEach(link => {
-                link.classList.remove('text-accent-indigo');
-                if (link.dataset.section === current) {
-                    link.classList.add('text-accent-indigo');
-                }
-            });
-        });
-
-        /** 6. FORM HANDLING **/
-        const contactForm = document.getElementById('contact-form');
-        const submitBtn = document.getElementById('submit-btn');
-
-        contactForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const email = document.getElementById('email').value;
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-            if (!emailRegex.test(email)) {
-                document.getElementById('email').classList.add('shake', 'border-red-500');
-                setTimeout(() => document.getElementById('email').classList.remove('shake'), 400);
+        function renderAccounts(data) {
+            accountsGrid.innerHTML = '';
+            if (data.length === 0) {
+                emptyState.classList.remove('hidden');
+                emptyState.classList.add('flex');
                 return;
             }
+            emptyState.classList.add('hidden');
+            emptyState.classList.remove('flex');
 
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = '<i class="fa-solid fa-circle-notch animate-spin"></i> Sending...';
+            data.forEach((acc, index) => {
+                const card = document.createElement('div');
+                card.className = `glass-card p-6 rounded-[24px] fade-in-up`;
+                card.style.animationDelay = `${index * 100}ms`;
+                
+                const isQRIS = acc.type === 'QRIS';
+                
+                card.innerHTML = `
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="flex flex-col">
+                            <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-sky-500 mb-1">${acc.type}</span>
+                            <h3 class="text-xl font-bold">${acc.provider}</h3>
+                        </div>
+                        <div class="p-3 bg-white/5 rounded-xl border border-white/10">
+                            <i data-lucide="${isQRIS ? 'qr-code' : 'wallet'}" class="w-6 h-6 text-slate-300"></i>
+                        </div>
+                    </div>
+                    <div class="space-y-1 mb-8">
+                        <p class="text-slate-400 text-xs font-medium uppercase tracking-wider">Account Holder</p>
+                        <p class="text-lg font-semibold truncate">${acc.accountName}</p>
+                    </div>
+                    <div class="flex gap-3">
+                        <button onclick="copyToClipboard('${acc.accountNumber}')" 
+                                class="flex-1 flex items-center justify-center gap-2 bg-slate-700/50 hover:bg-sky-600 transition-all py-3 rounded-xl font-semibold text-sm border border-white/5 group">
+                            <i data-lucide="copy" class="w-4 h-4 group-hover:scale-110 transition-transform"></i>
+                            Copy
+                        </button>
+                        ${isQRIS ? `
+                            <button onclick="showQR('${acc.provider}', '${acc.accountName}')"
+                                    class="flex-1 flex items-center justify-center gap-2 bg-sky-500 hover:bg-sky-400 transition-all py-3 rounded-xl font-semibold text-sm shadow-lg shadow-sky-500/20">
+                                <i data-lucide="maximize" class="w-4 h-4"></i>
+                                QR Code
+                            </button>
+                        ` : ''}
+                    </div>
+                `;
+                accountsGrid.appendChild(card);
+            });
+            lucide.createIcons();
+        }
 
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                showToast();
+            });
+        }
+
+        function showToast() {
+            toast.classList.add('toast-active');
             setTimeout(() => {
-                submitBtn.innerHTML = '<i class="fa-solid fa-check"></i> Sent Successfully';
-                submitBtn.classList.replace('btn-primary', 'bg-green-500');
-                contactForm.reset();
-            }, 1500);
+                toast.classList.remove('toast-active');
+            }, 2000);
+        }
+
+        function showQR(provider, name) {
+            document.getElementById('modalTitle').innerText = provider;
+            document.getElementById('modalSubtitle').innerText = name;
+            // Simulated QR Generator using QRServer API
+            document.getElementById('qrisImage').src = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=PayVault-${provider}-${name}&bgcolor=ffffff`;
+            qrisModal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            lucide.createIcons();
+        }
+
+        function closeModal() {
+            qrisModal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        searchInput.addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+            const filtered = accountsData.filter(acc => 
+                acc.provider.toLowerCase().includes(term) || 
+                acc.accountName.toLowerCase().includes(term) ||
+                acc.type.toLowerCase().includes(term)
+            );
+            renderAccounts(filtered);
         });
 
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
-            renderProjects();
-            type();
-            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+            renderAccounts(accountsData);
+            lucide.createIcons();
         });
     </script>
 </body>
