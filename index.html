@@ -1,384 +1,312 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Professional Minimalist Portfolio - Syid</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Portofolio Profesional syid — Creative Developer & UI Specialist</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        dark: '#050505',
+                        card: '#121212',
+                        border: '#2D2D2D',
+                        accent: {
+                            indigo: '#6366F1',
+                            purple: '#A855F7'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        :root {
-            --mouse-x: 50%;
-            --mouse-y: 50%;
-        }
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #0A0A0A;
-            color: #FFFFFF;
-            overflow-x: hidden;
-        }
-        .glow-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at var(--mouse-x) var(--mouse-y), rgba(99, 102, 241, 0.15) 0%, transparent 40%);
-            z-index: -1;
-            pointer-events: none;
-        }
-        .glass-card {
-            background: rgba(23, 23, 23, 0.6);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid #262626;
-        }
-        .text-gradient {
-            background: linear-gradient(to right, #6366F1, #8B5CF6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .btn-primary {
-            background: linear-gradient(to right, #6366F1, #8B5CF6);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .btn-magnetic:hover {
-            box-shadow: 0 0 20px rgba(99, 102, 241, 0.4);
-        }
-        .project-card {
-            overflow: hidden;
-            border-radius: 24px;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .project-card img {
-            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .project-card:hover img {
-            transform: scale(1.1);
-        }
-        .project-overlay {
-            opacity: 0;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            background: linear-gradient(to top, rgba(10, 10, 10, 0.9), transparent);
-        }
-        .project-card:hover .project-overlay {
-            opacity: 1;
-        }
-        .project-card:hover .project-info {
-            transform: translateY(0);
-        }
-        .project-info {
-            transform: translateY(10px);
-            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .nav-pill {
-            background: rgba(23, 23, 23, 0.8);
-            border: 1px solid #262626;
-            border-radius: 9999px;
-            padding: 8px 24px;
-        }
-        @keyframes floating {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
-        .float-anim {
-            animation: floating 4s ease-in-out infinite;
-        }
-        .shake {
-            animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
-        }
-        @keyframes shake {
-            10%, 90% { transform: translate3d(-1px, 0, 0); }
-            20%, 80% { transform: translate3d(2px, 0, 0); }
-            30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
-            40%, 60% { transform: translate3d(4px, 0, 0); }
-        }
-        .hide-card {
-            transform: scale(0.8);
-            opacity: 0;
-            display: none;
-        }
+        body { background-color: #050505; color: #F8FAFC; }
+        .glass-nav { backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid rgba(45, 45, 45, 0.5); }
+        .gradient-text { background: linear-gradient(135deg, #6366F1 0%, #A855F7 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .btn-primary { background: linear-gradient(135deg, #6366F1 0%, #A855F7 100%); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .btn-primary:hover { box-shadow: 0 0 20px rgba(99, 102, 241, 0.5); transform: scale(1.05); }
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        .project-card { transition: all 0.4s ease; border: 1px solid #2D2D2D; }
+        .project-card:hover { transform: translateY(-10px); border-color: #6366F1; }
+        @keyframes border-rotate { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        .animated-border { background: linear-gradient(270deg, #6366F1, #A855F7, #6366F1); background-size: 200% 200%; animation: border-rotate 4s ease infinite; padding: 4px; border-radius: 9999px; }
+        .typewriter::after { content: '|'; animation: blink 0.7s infinite; }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+        .shake { animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both; }
+        @keyframes shake { 10%, 90% { transform: translate3d(-1px, 0, 0); } 20%, 80% { transform: translate3d(2px, 0, 0); } 30%, 50%, 70% { transform: translate3d(-4px, 0, 0); } 40%, 60% { transform: translate3d(4px, 0, 0); } }
     </style>
 </head>
-<body>
-    <div class="glow-bg" id="cursor-glow"></div>
+<body class="antialiased">
 
-    <header id="navbar" class="fixed top-0 left-0 w-full z-50 py-6 transition-all duration-500">
-        <div class="container mx-auto max-w-[1100px] px-6 flex justify-between items-center">
-            <div class="text-2xl font-extrabold tracking-tighter">SYID<span class="text-indigo-500">.</span></div>
-            <nav class="hidden md:flex nav-pill gap-8 text-sm font-medium text-gray-400">
-                <a href="#hero" class="hover:text-white transition-colors">Home</a>
-                <a href="#projects" class="hover:text-white transition-colors">Works</a>
-                <a href="#about" class="hover:text-white transition-colors">About</a>
-            </nav>
-            <a href="#contact" class="btn-primary px-6 py-2.5 rounded-full text-sm font-bold btn-magnetic">Contact Me</a>
+    <nav class="fixed top-0 w-full z-50 glass-nav py-4">
+        <div class="max-w-[1200px] mx-auto px-6 flex justify-between items-center">
+            <a href="#" class="text-2xl font-heading font-extrabold tracking-tighter italic">syid<span class="text-accent-indigo">.</span></a>
+            <div class="hidden md:flex space-x-8 font-medium">
+                <a href="#home" class="nav-link text-slate-400 hover:text-white transition-colors" data-section="home">Home</a>
+                <a href="#projects" class="nav-link text-slate-400 hover:text-white transition-colors" data-section="projects">Projects</a>
+                <a href="#services" class="nav-link text-slate-400 hover:text-white transition-colors" data-section="services">Services</a>
+                <a href="#contact" class="nav-link text-slate-400 hover:text-white transition-colors" data-section="contact">Contact</a>
+            </div>
+            <a href="#contact" class="btn-primary px-6 py-2 rounded-full text-sm font-semibold">Hire Me</a>
         </div>
-    </header>
+    </nav>
 
-    <main>
-        <section id="hero" class="pt-48 pb-24 px-6">
-            <div class="container mx-auto max-w-[1100px] flex flex-col items-center text-center">
-                <div class="mb-8 p-1 rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 float-anim">
-                    <div class="bg-black rounded-full p-1">
-                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200&h=200" alt="Avatar" class="w-32 h-32 rounded-full object-cover">
-                    </div>
-                </div>
-                <h1 class="text-[40px] md:text-[64px] font-extrabold leading-tight mb-6 reveal-text">
-                    Crafting <span class="text-gradient">Digital Experiences</span><br>with Precision & Purpose.
+    <section id="home" class="pt-32 pb-20 md:pt-48 md:pb-32 px-6">
+        <div class="max-w-[1200px] mx-auto grid md:grid-cols-2 gap-12 items-center">
+            <div class="reveal">
+                <h1 class="text-5xl md:text-7xl font-heading font-extrabold leading-tight mb-6">
+                    Building <span class="gradient-text">Digital</span> Experience.
                 </h1>
-                <p class="text-gray-400 text-lg max-w-2xl mb-10 reveal-text">
-                    Senior Frontend Engineer based in Indonesia, specializing in high-interaction interfaces and modern web technologies.
+                <p class="text-xl text-slate-400 mb-8 max-w-lg">
+                    I am a <span id="typewriter" class="typewriter text-white font-semibold"></span><br>
+                    Crafting pixel-perfect interfaces with cutting-edge technology.
                 </p>
-                <div class="flex gap-4 reveal-text">
-                    <a href="#projects" class="btn-primary px-8 py-4 rounded-full font-bold btn-magnetic">View Projects</a>
-                    <a href="#contact" class="px-8 py-4 rounded-full font-bold glass-card hover:bg-white/10 transition-all border border-white/10">Let's Talk</a>
+                <div class="flex space-x-4">
+                    <a href="#projects" class="btn-primary px-8 py-4 rounded-full font-bold">View Works</a>
+                    <a href="#" class="px-8 py-4 rounded-full border border-border font-bold hover:bg-white hover:text-dark transition-all">Download CV</a>
                 </div>
             </div>
-        </section>
-
-        <section class="py-12 border-y border-white/5">
-            <div class="container mx-auto max-w-[1100px] px-6">
-                <div class="flex flex-wrap justify-center gap-12 opacity-40 grayscale hover:grayscale-0 transition-all">
-                    <i data-lucide="framer" class="w-8 h-8"></i>
-                    <i data-lucide="component" class="w-8 h-8"></i>
-                    <i data-lucide="layers" class="w-8 h-8"></i>
-                    <i data-lucide="code-2" class="w-8 h-8"></i>
-                    <i data-lucide="zap" class="w-8 h-8"></i>
-                </div>
-            </div>
-        </section>
-
-        <section id="projects" class="py-24 px-6">
-            <div class="container mx-auto max-w-[1100px]">
-                <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
-                    <div>
-                        <h2 class="text-3xl font-bold mb-4">Selected Works</h2>
-                        <p class="text-gray-400">A curated collection of my latest design and development.</p>
-                    </div>
-                    <div class="flex gap-2 p-1 glass-card rounded-full">
-                        <button onclick="filterProjects('all')" class="filter-btn active px-6 py-2 rounded-full text-sm font-medium bg-indigo-600">All</button>
-                        <button onclick="filterProjects('web')" class="filter-btn px-6 py-2 rounded-full text-sm font-medium hover:bg-white/5">Web</button>
-                        <button onclick="filterProjects('mobile')" class="filter-btn px-6 py-2 rounded-full text-sm font-medium hover:bg-white/5">Mobile</button>
-                    </div>
-                </div>
-
-                <div id="project-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div class="project-card glass-card group relative h-[400px]" data-category="web">
-                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800" alt="Nexus Dashboard" class="w-full h-full object-cover">
-                        <div class="project-overlay absolute inset-0 p-8 flex flex-col justify-end">
-                            <div class="project-info">
-                                <span class="text-xs font-bold uppercase tracking-widest text-indigo-400 mb-2 block">Web Development</span>
-                                <h3 class="text-2xl font-bold mb-2">Nexus Analytics SaaS</h3>
-                                <p class="text-gray-300 text-sm mb-4">Real-time data visualization platform for enterprise metrics.</p>
-                                <a href="#" class="inline-flex items-center gap-2 text-sm font-bold hover:text-indigo-400 transition-colors">View Case Study <i data-lucide="arrow-up-right" class="w-4 h-4"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-card glass-card group relative h-[400px]" data-category="mobile">
-                        <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&q=80&w=800" alt="Fintech App" class="w-full h-full object-cover">
-                        <div class="project-overlay absolute inset-0 p-8 flex flex-col justify-end">
-                            <div class="project-info">
-                                <span class="text-xs font-bold uppercase tracking-widest text-indigo-400 mb-2 block">Mobile App</span>
-                                <h3 class="text-2xl font-bold mb-2">Velo Banking App</h3>
-                                <p class="text-gray-300 text-sm mb-4">Minimalist mobile banking experience for Gen-Z.</p>
-                                <a href="#" class="inline-flex items-center gap-2 text-sm font-bold hover:text-indigo-400 transition-colors">View Case Study <i data-lucide="arrow-up-right" class="w-4 h-4"></i></a>
-                            </div>
-                        </div>
+            <div class="flex justify-center md:justify-end reveal">
+                <div class="animated-border w-64 h-64 md:w-80 md:h-80">
+                    <div class="w-full h-full rounded-full overflow-hidden bg-dark">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=800" alt="Avatar" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500">
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section id="contact" class="py-24 px-6 bg-[#0F0F0F]">
-            <div class="container mx-auto max-w-[1100px] grid grid-cols-1 lg:grid-cols-2 gap-16">
+    <section id="projects" class="py-24 bg-[#080808]">
+        <div class="max-w-[1200px] mx-auto px-6">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6 reveal">
                 <div>
-                    <h2 class="text-4xl font-extrabold mb-6">Let's build something <br><span class="text-gradient">extraordinary.</span></h2>
-                    <p class="text-gray-400 mb-8">Ready to start a project or just want to say hi? My inbox is always open.</p>
+                    <h2 class="text-4xl font-heading font-bold mb-4">Selected Projects</h2>
+                    <p class="text-slate-400">Filtering through my latest creative endeavors.</p>
+                </div>
+                <div class="flex flex-wrap gap-3" id="filter-container">
+                    <button class="filter-btn active bg-accent-indigo text-white px-5 py-2 rounded-full text-sm font-medium transition-all" data-filter="all">All</button>
+                    <button class="filter-btn border border-border text-slate-400 px-5 py-2 rounded-full text-sm font-medium hover:border-accent-indigo transition-all" data-filter="Web">Web</button>
+                    <button class="filter-btn border border-border text-slate-400 px-5 py-2 rounded-full text-sm font-medium hover:border-accent-indigo transition-all" data-filter="Mobile">Mobile</button>
+                    <button class="filter-btn border border-border text-slate-400 px-5 py-2 rounded-full text-sm font-medium hover:border-accent-indigo transition-all" data-filter="Design">Design</button>
+                </div>
+            </div>
+            
+            <div id="project-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 transition-all duration-500">
+                </div>
+        </div>
+    </section>
+
+    <section id="services" class="py-24 px-6">
+        <div class="max-w-[1200px] mx-auto">
+            <h2 class="text-4xl font-heading font-bold mb-16 text-center reveal">My Expertise</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="project-card p-10 bg-card rounded-3xl reveal">
+                    <div class="w-14 h-14 bg-accent-indigo/10 flex items-center justify-center rounded-2xl mb-6 text-accent-indigo text-2xl">
+                        <i class="fa-solid fa-code"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Frontend Dev</h3>
+                    <p class="text-slate-400">Clean, performant code using React, Vue, and modern CSS frameworks.</p>
+                </div>
+                <div class="project-card p-10 bg-card rounded-3xl reveal">
+                    <div class="w-14 h-14 bg-accent-purple/10 flex items-center justify-center rounded-2xl mb-6 text-accent-purple text-2xl">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">UI/UX Design</h3>
+                    <p class="text-slate-400">Creating intuitive user journeys and stunning visual identities.</p>
+                </div>
+                <div class="project-card p-10 bg-card rounded-3xl reveal">
+                    <div class="w-14 h-14 bg-green-500/10 flex items-center justify-center rounded-2xl mb-6 text-green-500 text-2xl">
+                        <i class="fa-solid fa-rocket"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Optimization</h3>
+                    <p class="text-slate-400">Improving web vitals and ensuring lightning-fast load times.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-24 px-6 bg-[#080808]">
+        <div class="max-w-[1200px] mx-auto">
+            <div class="bg-card border border-border rounded-[2.5rem] p-8 md:p-16 grid md:grid-cols-2 gap-16 reveal">
+                <div>
+                    <h2 class="text-4xl font-heading font-bold mb-6">Let's build something <span class="gradient-text">extraordinary</span>.</h2>
+                    <p class="text-slate-400 mb-8">Ready to start your next project or just want to say hi? My inbox is always open.</p>
                     <div class="space-y-4">
-                        <div class="flex items-center gap-4 text-gray-300">
-                            <div class="w-12 h-12 glass-card rounded-full flex items-center justify-center">
-                                <i data-lucide="mail" class="w-5 h-5"></i>
-                            </div>
-                            <span>hello@syid.design</span>
+                        <div class="flex items-center space-x-4">
+                            <i class="fa-solid fa-envelope text-accent-indigo"></i>
+                            <span>hello@syid.dev</span>
                         </div>
-                        <div class="flex items-center gap-4 text-gray-300">
-                            <div class="w-12 h-12 glass-card rounded-full flex items-center justify-center">
-                                <i data-lucide="map-pin" class="w-5 h-5"></i>
-                            </div>
-                            <span>Jakarta, Indonesia</span>
+                        <div class="flex items-center space-x-4">
+                            <i class="fa-brands fa-linkedin text-accent-indigo"></i>
+                            <span>linkedin.com/in/syid</span>
                         </div>
                     </div>
                 </div>
-
-                <div class="glass-card p-8 rounded-[32px]">
-                    <form id="contact-form" class="space-y-6">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div class="space-y-2">
-                                <label class="text-xs font-bold uppercase text-gray-500 ml-1">Name</label>
-                                <input type="text" placeholder="John Doe" class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:border-indigo-500 focus:outline-none transition-all">
-                            </div>
-                            <div class="space-y-2">
-                                <label class="text-xs font-bold uppercase text-gray-500 ml-1">Email</label>
-                                <input type="email" id="email-input" placeholder="john@example.com" class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:border-indigo-500 focus:outline-none transition-all">
-                            </div>
-                        </div>
-                        <div class="space-y-2">
-                            <label class="text-xs font-bold uppercase text-gray-500 ml-1">Message</label>
-                            <textarea rows="4" placeholder="How can I help you?" class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:border-indigo-500 focus:outline-none transition-all"></textarea>
-                        </div>
-                        <button type="submit" class="w-full btn-primary py-5 rounded-2xl font-bold text-lg btn-magnetic">Send Message</button>
-                    </form>
-                </div>
+                <form id="contact-form" class="space-y-4">
+                    <input type="text" id="name" placeholder="Your Name" required class="w-full bg-dark border border-border rounded-xl px-6 py-4 focus:border-accent-indigo focus:outline-none transition-all">
+                    <input type="email" id="email" placeholder="Email Address" required class="w-full bg-dark border border-border rounded-xl px-6 py-4 focus:border-accent-indigo focus:outline-none transition-all">
+                    <textarea id="message" rows="4" placeholder="Your Project Brief" required class="w-full bg-dark border border-border rounded-xl px-6 py-4 focus:border-accent-indigo focus:outline-none transition-all"></textarea>
+                    <button type="submit" id="submit-btn" class="btn-primary w-full py-4 rounded-xl font-bold text-white transition-all">Send Message</button>
+                </form>
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
 
-    <footer class="py-12 border-t border-white/5 text-center text-gray-500 text-sm">
-        <p>&copy; 2024 Syid Portfolio. Built with passion and code.</p>
+    <footer class="py-12 border-t border-border text-center text-slate-500 text-sm">
+        <p>&copy; 2026 syid. Built with Precision and Passion.</p>
     </footer>
 
     <script>
-        // Initialize Icons
-        lucide.createIcons();
+        /** 1. DATA PROJECTS **/
+        const projects = [
+            { id: 1, title: "FinTech Dashboard", category: "Web", img: "https://images.unsplash.com/photo-1551288049-bbbda5366392?auto=format&fit=crop&q=80&w=800" },
+            { id: 2, title: "HealthTrack App", category: "Mobile", img: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80&w=800" },
+            { id: 3, title: "NeoBranding Kit", category: "Design", img: "https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&q=80&w=800" },
+            { id: 4, title: "E-Commerce OS", category: "Web", img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800" },
+            { id: 5, title: "Travel Guide UI", category: "Mobile", img: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&q=80&w=800" },
+            { id: 6, title: "Abstract 3D Art", category: "Design", img: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=800" },
+        ];
 
-        // 1. Interactive Background Logics (LERP)
-        let mouseX = 0, mouseY = 0;
-        let currentX = 0, currentY = 0;
-        const glow = document.getElementById('cursor-glow');
+        /** 2. DYNAMIC PROJECT GALLERY & FILTERING **/
+        const projectGrid = document.getElementById('project-grid');
+        const filterBtns = document.querySelectorAll('.filter-btn');
 
-        window.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-        });
-
-        function animateGlow() {
-            currentX += (mouseX - currentX) * 0.1;
-            currentY += (mouseY - currentY) * 0.1;
-            glow.style.setProperty('--mouse-x', `${currentX}px`);
-            glow.style.setProperty('--mouse-y', `${currentY}px`);
-            requestAnimationFrame(animateGlow);
-        }
-        animateGlow();
-
-        // 2. Navbar Scroll Behavior
-        window.addEventListener('scroll', () => {
-            const nav = document.getElementById('navbar');
-            if (window.scrollY > 80) {
-                nav.classList.add('bg-black/60', 'backdrop-blur-lg', 'py-4');
-                nav.classList.remove('py-6');
-            } else {
-                nav.classList.remove('bg-black/60', 'backdrop-blur-lg', 'py-4');
-                nav.classList.add('py-6');
-            }
-        });
-
-        // 3. Magnetic Button Effect
-        document.querySelectorAll('.btn-magnetic').forEach(btn => {
-            btn.addEventListener('mousemove', (e) => {
-                const rect = btn.getBoundingClientRect();
-                const x = e.clientX - rect.left - rect.width / 2;
-                const y = e.clientY - rect.top - rect.height / 2;
-                btn.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px) scale(1.05)`;
-            });
-            btn.addEventListener('mouseleave', () => {
-                btn.style.transform = `translate(0, 0) scale(1)`;
-            });
-            btn.addEventListener('mousedown', () => {
-                btn.style.transform = `scale(0.95)`;
-            });
-        });
-
-        // 4. Project Filtering Logic
-        function filterProjects(category) {
-            const cards = document.querySelectorAll('.project-card');
-            const btns = document.querySelectorAll('.filter-btn');
+        function renderProjects(category = 'all') {
+            projectGrid.style.opacity = '0';
             
-            btns.forEach(btn => {
-                btn.classList.remove('bg-indigo-600');
-                if(btn.innerText.toLowerCase() === category) btn.classList.add('bg-indigo-600');
-                if(category === 'all' && btn.innerText.toLowerCase() === 'all') btn.classList.add('bg-indigo-600');
-            });
+            setTimeout(() => {
+                const filtered = category === 'all' ? projects : projects.filter(p => p.category === category);
+                projectGrid.innerHTML = filtered.map(p => `
+                    <div class="project-card bg-card rounded-3xl overflow-hidden reveal active">
+                        <div class="h-64 overflow-hidden">
+                            <img src="${p.img}" alt="${p.title}" class="w-full h-full object-cover hover:scale-110 transition-transform duration-700">
+                        </div>
+                        <div class="p-6">
+                            <span class="text-xs font-bold text-accent-indigo uppercase tracking-widest">${p.category}</span>
+                            <h3 class="text-xl font-bold mt-2">${p.title}</h3>
+                        </div>
+                    </div>
+                `).join('');
+                projectGrid.style.opacity = '1';
+            }, 300);
+        }
 
-            cards.forEach(card => {
-                const cat = card.getAttribute('data-category');
-                if (category === 'all' || cat === category) {
-                    card.style.display = 'block';
-                    setTimeout(() => {
-                        card.style.opacity = '1';
-                        card.style.transform = 'scale(1)';
-                    }, 10);
-                } else {
-                    card.style.opacity = '0';
-                    card.style.transform = 'scale(0.8)';
-                    setTimeout(() => {
-                        card.style.display = 'none';
-                    }, 400);
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active', 'bg-accent-indigo', 'text-white'));
+                filterBtns.forEach(b => b.classList.add('border', 'border-border', 'text-slate-400'));
+                
+                btn.classList.add('active', 'bg-accent-indigo', 'text-white');
+                btn.classList.remove('border', 'border-border', 'text-slate-400');
+                
+                renderProjects(btn.dataset.filter);
+            });
+        });
+
+        /** 3. TYPEWRITER ANIMATION **/
+        const textElement = document.getElementById('typewriter');
+        const phrases = ["Creative Developer", "UI/UX Specialist", "Problem Solver"];
+        let phraseIdx = 0;
+        let charIdx = 0;
+        let isDeleting = false;
+
+        function type() {
+            const currentPhrase = phrases[phraseIdx];
+            if (isDeleting) {
+                textElement.textContent = currentPhrase.substring(0, charIdx - 1);
+                charIdx--;
+            } else {
+                textElement.textContent = currentPhrase.substring(0, charIdx + 1);
+                charIdx++;
+            }
+
+            let typeSpeed = isDeleting ? 50 : 150;
+
+            if (!isDeleting && charIdx === currentPhrase.length) {
+                isDeleting = true;
+                typeSpeed = 2000; // Pause at end
+            } else if (isDeleting && charIdx === 0) {
+                isDeleting = false;
+                phraseIdx = (phraseIdx + 1) % phrases.length;
+                typeSpeed = 500;
+            }
+
+            setTimeout(type, typeSpeed);
+        }
+
+        /** 4. INTERSECTION OBSERVER (REVEAL) **/
+        const observerOptions = { threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
                 }
             });
-        }
+        }, observerOptions);
 
-        // 5. Contact Form Validation Logic
-        const form = document.getElementById('contact-form');
-        const emailInput = document.getElementById('email-input');
+        /** 5. ACTIVE NAV & SMOOTH SCROLL **/
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
 
-        emailInput.addEventListener('input', (e) => {
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (emailRegex.test(e.target.value)) {
-                emailInput.style.borderColor = '#6366F1';
-            } else {
-                emailInput.style.borderColor = '#262626';
-            }
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 150) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('text-accent-indigo');
+                if (link.dataset.section === current) {
+                    link.classList.add('text-accent-indigo');
+                }
+            });
         });
 
-        form.addEventListener('submit', (e) => {
+        /** 6. FORM HANDLING **/
+        const contactForm = document.getElementById('contact-form');
+        const submitBtn = document.getElementById('submit-btn');
+
+        contactForm.addEventListener('submit', (e) => {
             e.preventDefault();
+            const email = document.getElementById('email').value;
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(emailInput.value)) {
-                emailInput.classList.add('shake');
-                setTimeout(() => emailInput.classList.remove('shake'), 500);
-            } else {
-                alert('Message Sent Successfully!');
-                form.reset();
+
+            if (!emailRegex.test(email)) {
+                document.getElementById('email').classList.add('shake', 'border-red-500');
+                setTimeout(() => document.getElementById('email').classList.remove('shake'), 400);
+                return;
             }
+
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fa-solid fa-circle-notch animate-spin"></i> Sending...';
+
+            setTimeout(() => {
+                submitBtn.innerHTML = '<i class="fa-solid fa-check"></i> Sent Successfully';
+                submitBtn.classList.replace('btn-primary', 'bg-green-500');
+                contactForm.reset();
+            }, 1500);
         });
 
-        // 6. GSAP Reveal Animations
-        gsap.registerPlugin(ScrollTrigger);
-
-        gsap.from(".reveal-text", {
-            y: 40,
-            opacity: 0,
-            duration: 1,
-            stagger: 0.2,
-            ease: "power4.out",
-            scrollTrigger: {
-                trigger: "#hero",
-                start: "top 80%",
-            }
-        });
-
-        gsap.from("#navbar", {
-            y: -100,
-            opacity: 0,
-            duration: 1.2,
-            ease: "power4.out"
-        });
-
-        gsap.from(".project-card", {
-            y: 60,
-            opacity: 0,
-            duration: 1,
-            stagger: 0.2,
-            ease: "power4.out",
-            scrollTrigger: {
-                trigger: "#projects",
-                start: "top 70%",
-            }
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProjects();
+            type();
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
         });
     </script>
 </body>
